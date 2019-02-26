@@ -1,0 +1,11 @@
+Returning to gateway device...
+<form id='doauth' action='http://[% target %]/portal/auth' method='GET'>
+    <input type='hidden' name='username' value='[% tok_username %]'>
+    <input type='hidden' name='password' value='[% tok_password %]'>
+    <input type='hidden' name='operation' value='login'>
+    <input type='hidden' name='clientMac' value='[% clientMac %]'>
+</form>
+
+<script>
+    document.getElementById("doauth").submit();
+</script>

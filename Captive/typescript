@@ -1,0 +1,51 @@
+Script started on Wed 20 Feb 2019 03:47:22 PM -03
+]0;jasimioni@zabster-monitoring:~/Devel/captive/Captive[?1034h[jasimioni@zabster-monitoring Captive]$ ls -l
+total 56
+-rw-rw-r--. 1 jasimioni jasimioni   133 Jan  6 15:17 captive.conf
+-rw-rw-r--. 1 jasimioni jasimioni   113 Jan  6 15:17 captive.psgi
+-rw-rw-r--. 1 jasimioni jasimioni   146 Jan  6 15:17 Changes
+drwxrwxr-x. 5 jasimioni jasimioni    47 Jan  6 16:15 [0m[01;34minc[0m
+drwxrwxr-x. 3 jasimioni jasimioni    39 Jan  7 21:36 [01;34mlib[0m
+-rw-r--r--. 1 jasimioni jasimioni 29463 Jan  6 16:15 Makefile.old
+-rw-rw-r--. 1 jasimioni jasimioni  1165 Jan  6 17:11 Makefile.PL
+-rw-rw-r--. 1 jasimioni jasimioni   891 Jan  6 16:15 META.yml
+-rw-rw-r--. 1 jasimioni jasimioni    54 Jan  6 15:17 README
+drwxrwxr-x. 5 jasimioni jasimioni    81 Jan  6 21:25 [01;34mroot[0m
+drwxrwxr-x. 2 jasimioni jasimioni   127 Jan  6 15:17 [01;34mscript[0m
+drwxrwxr-x. 2 jasimioni jasimioni   149 Jan  6 20:49 [01;34mt[0m
+-rw-rw-r--. 1 jasimioni jasimioni     0 Feb 20 15:47 typescript
+]0;jasimioni@zabster-monitoring:~/Devel/captive/Captive[jasimioni@zabster-monitoring Captive]$ [18P(reverse-i-search)`':[C[29@r': script/captive_server.pl -r^C
+]0;jasimioni@zabster-monitoring:~/Devel/captive/Captive[jasimioni@zabster-monitoring Captive]$ ^C
+]0;jasimioni@zabster-monitoring:~/Devel/captive/Captive[jasimioni@zabster-monitoring Captive]$ [18P(reverse-i-search)`':[C-': ls -lr': script/captive_server.pl -r [16@[jasimioni@zabster-monitoring Captive]$[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd 
+[debug] Debug messages enabled
+[debug] Statistics enabled
+[debug] Loaded Config "/home/jasimioni/Devel/captive/Captive/captive.conf"
+Not inlining 'new' for Captive::View::HTML since it is not inheriting the default Moose::Object::new
+If you are certain you don't need to inline your constructor, specify inline_constructor => 0 in your call to Captive::View::HTML->meta->make_immutable
+Not inlining 'new' for Captive::View::HTMLNW since it is not inheriting the default Moose::Object::new
+If you are certain you don't need to inline your constructor, specify inline_constructor => 0 in your call to Captive::View::HTMLNW->meta->make_immutable
+Term::Size::Any is not installed, can't autodetect terminal column width
+Trouble trying to detect your terminal size, looking at $ENV{COLUMNS}
+Cannot determine desired terminal width, using default of 80 columns
+[debug] Loaded plugins:
+.----------------------------------------------------------------------------.
+| Catalyst::Plugin::ConfigLoader  0.34                                       |
+| Catalyst::Plugin::LogWarnings  0.03                                        |
+| Catalyst::Plugin::Session  0.41                                            |
+| Catalyst::Plugin::Session::State::Cookie  0.17                             |
+| Catalyst::Plugin::Session::Store::File  0.18                               |
+| Catalyst::Plugin::SmartURI  0.041                                          |
+'----------------------------------------------------------------------------'
+
+[debug] Loaded PSGI Middleware:
+.----------------------------------------------------------------------------.
+| Catalyst::Middleware::Stash                                                |
+| Plack::Middleware::HTTPExceptions                                          |
+| Plack::Middleware::RemoveRedundantBody  0.06                               |
+| Plack::Middleware::FixMissingBodyInRedirect  0.12                          |
+| Plack::Middleware::ContentLength                                           |
+| Plack::Middleware::MethodOverride  0.20                                    |
+| Plack::Middleware::Head                                                    |
+| Plack::Middleware::ReverseProxy  0.15                                      |
+| Plack::Middleware::ReverseProxy  0.15                                      |
+'---------------------------------------------------------------
