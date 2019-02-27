@@ -1,0 +1,10 @@
+Returning to gateway device...
+<form id='doauth' action='[% target %]' method='GET'>
+    <input type='hidden' name='username' value='[% tok_username %]'>
+    <input type='hidden' name='password' value='[% tok_password %]'>
+    <input type='hidden' name='dst'      value='[% dst %]'>
+</form>
+
+<script>
+    document.getElementById("doauth").submit();
+</script>
