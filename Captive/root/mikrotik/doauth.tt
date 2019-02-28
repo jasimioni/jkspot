@@ -1,5 +1,10 @@
 Returning to gateway device...
-<form id='doauth' action='[% target %]' method='GET'>
+<script>
+	location = '[% target %]?username=[% tok_username %]&password=[% tok_password %]&dst=[% dst %]&domain=[% auth_domain %]';
+</script>
+
+
+<!-- form id='doauth' action='[% target %]' method='GET'>
     <input type='hidden' name='username' value='[% tok_username %]'>
     <input type='hidden' name='password' value='[% tok_password %]'>
     <input type='hidden' name='dst'      value='[% dst %]'>
@@ -7,4 +12,4 @@ Returning to gateway device...
 
 <script>
     document.getElementById("doauth").submit();
-</script>
+</script -->

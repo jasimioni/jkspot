@@ -22,6 +22,7 @@ sub check_login :Local {
     if ($username eq 'joao' && $password eq 'simioni') {
         $c->stash(tok_username => 'joao');
         $c->stash(tok_password => 'simioni');
+        $c->stash(auth_domain  => 'basic_internal');
         $c->go('/' . $c->session->{device} . '/doauth');
     } else {
         push @{$c->stash->{errors}}, "Usuário ou senha inválidos";
