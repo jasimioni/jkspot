@@ -1,4 +1,4 @@
-# feb/27/2019 23:38:55 by RouterOS 6.43.12
+# mar/02/2019 00:43:17 by RouterOS 6.43.12
 # software id = DJ6T-MIEZ
 #
 # model = RouterBOARD 941-2nD
