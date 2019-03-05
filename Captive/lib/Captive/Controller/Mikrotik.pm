@@ -9,10 +9,17 @@ sub index :Path :Args(0) {
 
     my $target = $c->req->params->{'target'};
     my $dst	   = $c->req->params->{'dst'};
+    my $ip     = $c->req->params->{'ip'};
+    my $mac    = $c->req->params->{'mac'};
 
     $c->session('target' => $target);
     $c->session('dst'    => $dst);
+    $c->session('mac'    => $mac);
+    $c->session('ip'     => $ip);
     $c->session('device' => 'mikrotik');
+
+    my $error = $c->req->params->{'error'};
+    push @{$c->stash->{errors}}, $error if $error;
 
     $c->go('/login/form');
 }

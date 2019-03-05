@@ -62,8 +62,7 @@ __PACKAGE__->config(
     'Plugin::SmartURI' => {
         disposition => 'relative',
         uri_class   => 'URI::SmartURI'
-    }
-
+    },
 );
 
 # Start the application

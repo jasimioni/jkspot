@@ -10,9 +10,9 @@ sub index :Path :Args(0) {
     my $mac    = $c->req->params->{'clientMac'};
     my $target = $c->req->params->{'target'};
 
-    $c->session('target'    => $target);
-    $c->session('clientMac' => $mac);
-    $c->session('device'    => 'eap');
+    $c->session('target' => $target);
+    $c->session('mac'    => $mac);
+    $c->session('device' => 'eap');
 
     $c->go('/login/form');
 }
@@ -21,7 +21,7 @@ sub doauth :Local {
     my ( $self, $c ) = @_;
 
     $c->stash(target      => $c->session->{target});
-    $c->stash('clientMac' => $c->session->{clientMac});
+    $c->stash('clientMac' => $c->session->{mac});
 }
 
 __PACKAGE__->meta->make_immutable;
