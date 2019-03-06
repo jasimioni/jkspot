@@ -1,11 +1,19 @@
-[% IF errors %]
-    [% FOR error IN errors %]
-    <div>[% error %]</div>
-    [% END %]
-[% END %]
-
-<form action='[% c.uri_for('/login/internal_db') %]' method='POST'>
-    Username: <input type='text' name='username'><br>
-    Password: <input type='text' name='password'><br>
-    <input type='submit' value='logar'>
-</form>
+<link href="[% c.uri_for('/static/bootstrap/css/signin.css') %]" rel="stylesheet">
+<body class="text-center">
+	[% IF errors %]
+	    [% FOR error IN errors %]
+		<div class="alert alert-danger" role="alert">
+		  [% error %]
+		</div>
+	    [% END %]
+	[% END %]
+	<form class="form-signin" action='[% c.uri_for('/login/internal_db') %]' method='POST'>
+		<img class="mb-4" src="[% c.uri_for('/static/images/customer_logo.png') %]" alt="">
+		<h1 class="h3 mb-3 font-weight-normal">Faça login para navegar</h1>
+		<label for="username" class="sr-only">Usuário:</label>
+		<input type="text" id="username" name='username' class="form-control" placeholder="Usuário" required autofocus>
+		<label for="password" class="sr-only">´Senha:</label>
+		<input type="password" id="password" name="password" class="form-control" placeholder="Senha" required>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Fazer Login</button>
+	</form>
+</body>
