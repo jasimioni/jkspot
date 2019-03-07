@@ -2,6 +2,7 @@ package Captive::Controller::Login;
 use Moose;
 use namespace::autoclean;
 use utf8;
+use Try::Tiny;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -11,25 +12,65 @@ sub index :Path :Args(0) {
 
 sub form :Local {
     my ( $self, $c ) = @_;
+
+    $c->stash(authentication => $c->model('Config')->authentication);
 }
 
-sub internal_db :Local {
+sub name_email :Local {
     my ( $self, $c ) = @_;
 
-    my $username = $c->req->params->{username};
-    my $password = $c->req->params->{password};
+    my $name         = $c->req->params->{name};
+    my $email        = $c->req->params->{email};
+    my $allowcontact = $c->req->params->{allowcontact};
 
-    if (1) { # Any Password
-        $c->stash(tok_username => $username);
-        $c->stash(auth_domain  => 'internaldb');
-        $c->go('create_radius_credentials');
-    } else {
-        push @{$c->stash->{errors}}, "Usuário ou senha inválidos";
+    try {
+        die "Método de autenticação não permitido\n" if $c->model('Config')->authentication->{default} ne 'name_email';
+        $c->stash(tok_username => $email);
+        $c->stash(auth_domain  => 'name_email');
+        # $c->model('UserDB')->register_name_email($name, $email, $allowcontact);
+        $c->go('/login/create_radius_credentials');
+    } catch {
+        push @{$c->stash->{errors}}, "$_";
         $c->go('/login/form');
-    }
+    };
 }
 
-sub create_radius_credentials :Local {
+sub click_only :Local {
+    my ( $self, $c ) = @_;
+
+    try {
+        die "Método de autenticação não permitido\n" if $c->model('Config')->authentication->{default} ne 'click_only';
+        my @chars = ("A".."Z", "a".."z", "0" .. "9");
+        my $login = "clickonly_" . time() . '_';
+        $login .= $chars[rand @chars] for 1..4;
+        $c->stash(tok_username => $login);
+        $c->stash(auth_domain  => 'click_only');
+        $c->go('/login/create_radius_credentials');        
+    } catch {
+        push @{$c->stash->{errors}}, "$_";
+        $c->go('/login/form');
+    };
+}
+
+sub username_password :Local {
+    my ( $self, $c ) = @_;
+
+    try {
+        my $username = $c->req->params->{username};
+        my $password = $c->req->params->{password};
+
+        die "Usuário ou senha inválidos\n" unless $c->model('UserDB')->authenticate($username, $password);
+
+        $c->stash(tok_username => $username);
+        $c->stash(auth_domain  => 'internaldb');
+        $c->go('/login/create_radius_credentials');
+    } catch {
+        push @{$c->stash->{errors}}, "$_";
+        $c->go('/login/form');
+    };
+}
+
+sub create_radius_credentials :Private {
     my ( $self, $c ) = @_;
 
     my $userid          = $c->stash->{tok_username};
@@ -46,9 +87,12 @@ sub create_radius_credentials :Local {
     my ($success, $return) = $c->model('RadiusDB')->create_radius_credentials($userid, $customer_id, $mac, $ip, $details, $radius_attrs, $expiration_time);
 
     if ($success) {
+        $c->log->debug("Success creating radius credentials - going to doauth");
         $c->stash(tok_password => $return);
-        $c->go('/' . $c->session->{device} . '/doauth');
+        my $destination = '/' . $c->session->{device} . '/doauth';
+        $c->go($destination);
     } else {
+        $c->log->debug("Failed to create credentials - $return");
         push @{$c->stash->{errors}}, $return;
         $c->go('/login/form');        
     }

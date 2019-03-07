@@ -1,7 +1,14 @@
-Returning to gateway device...
-<script>
-	location = '[% target %]?username=[% tok_username %]&password=[% tok_password %]&dst=[% dst %]&domain=[% auth_domain %]';
-</script>
+<html>
+	<head>
+		<title>Returning to Gateway Device</title>
+		<script>
+			location = '[% target %]?username=[% tok_username %]&password=[% tok_password %]&dst=[% dst %]&domain=[% auth_domain %]';
+		</script>
+	</head>
+	<body>
+		Retornando ao Gateway para autenticação. Se falhar, <a href='[% target %]?username=[% tok_username %]&password=[% tok_password %]&dst=[% dst %]&domain=[% auth_domain %]'>clique aqui</a>
+	</body>
+</html>
 
 
 <!-- form id='doauth' action='[% target %]' method='GET'>

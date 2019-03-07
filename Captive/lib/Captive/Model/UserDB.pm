@@ -11,27 +11,9 @@ __PACKAGE__->config(
   options       => {},
 );
 
-=head1 NAME
-
-Captive::Model::UserDB - DBI Model Class
-
-=head1 SYNOPSIS
-
-See L<Captive>
-
-=head1 DESCRIPTION
-
-DBI Model Class.
-
-=head1 AUTHOR
-
-root
-
-=head1 LICENSE
-
-This library is free software, you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
+sub authenticate {
+	my ( $self, $username, $password ) = @_;
+	return 1;
+}
 
 1;

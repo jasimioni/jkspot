@@ -1,5 +1,6 @@
 <link href="[% c.uri_for('/static/bootstrap/css/signin.css') %]" rel="stylesheet">
 <body class="text-center">
+	<form class="form-signin" action='[% c.uri_for('/login/' _ authentication.default) %]' method='POST'>
 	[% IF errors %]
 	    [% FOR error IN errors %]
 		<div class="alert alert-danger" role="alert">
@@ -7,13 +8,39 @@
 		</div>
 	    [% END %]
 	[% END %]
-	<form class="form-signin" action='[% c.uri_for('/login/internal_db') %]' method='POST'>
 		<img class="mb-4" src="[% c.uri_for('/static/images/customer_logo.png') %]" alt="">
+	[% IF authentication.default == 'name_email' %]
+	[% INCLUDE name_email %]
+	[% ELSIF authentication.default == 'click_only' %]
+	[% INCLUDE click_only %]
+	[% ELSE %]
+	[% INCLUDE username_password %]
+	[% END %]
+	</form>
+</body>
+
+[% BLOCK username_password %]
 		<h1 class="h3 mb-3 font-weight-normal">Faça login para navegar</h1>
 		<label for="username" class="sr-only">Usuário:</label>
 		<input type="text" id="username" name='username' class="form-control" placeholder="Usuário" required autofocus>
-		<label for="password" class="sr-only">´Senha:</label>
+		<label for="password" class="sr-only">Senha:</label>
 		<input type="password" id="password" name="password" class="form-control" placeholder="Senha" required>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Fazer Login</button>
-	</form>
-</body>
+		[% IF authentication.username_password.allow_guest_creation %]
+		<a href='[% c.uri_for('/login/create_account') %]'>Criar conta para acesso</a>
+		[% END %]
+[% END %]
+
+[% BLOCK name_email %]
+		<h1 class="h3 mb-3 font-weight-normal">Forneça seus dados para navegar</h1>
+		<label for="name" class="sr-only">Nome:</label>
+		<input type="text" id="name" name='name' class="form-control" placeholder="Nome" required autofocus>
+		<label for="email" class="sr-only">E-Mail:</label>
+		<input type="email" id="email" name="email" class="form-control" placeholder="E-Mail" required>
+		<input type='checkbox' name="allowcontact" id='allowcontact' values='yes' checked> Desejo receber informações adicionais
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Navegar</button>
+[% END %]
+
+[% BLOCK click_only %]
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Navegar</button>
+[% END %]

@@ -29,6 +29,7 @@ sub doauth :Local {
 
     $c->stash(target => $c->session->{target});
     $c->stash(dst    => $c->session->{dst});
+    $c->stash(current_view => 'HTMLNW');
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -24,17 +24,33 @@ __PACKAGE__->config(
 		'Port-Limit'          => 1,
 		'Session-Timeout'     => 3600,
 		'Idle-Timeout'        => 1800,
+	},
+	authentication => {
+		default => 'username_password', # username_password, name_email, click_only
+		username_password => {
+			allow_guest_creation => 1,
+		},
+		facebook => {
+			enabled 	  => 1,
+			appid   	  => '',
+			guest_allowed => 1,
+		}
 	}
 );
 
 sub customer_id {
 	my $self = shift;
-	$self->config->{customer_id};
+	return $self->config->{customer_id};
 }
 
 sub radius_attrs {
 	my $self = shift;
-	$self->config->{radius_attrs};
+	return $self->config->{radius_attrs};
+}
+
+sub authentication {
+	my $self = shift;
+	return $self->config->{authentication};
 }
 
 1;

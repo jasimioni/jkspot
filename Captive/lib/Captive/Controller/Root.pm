@@ -21,7 +21,15 @@ sub default :Path {
 
 sub auto :Private {
     my ($self, $c) = @_;
-    $c->stash(title => 'Captive Portal') if ! defined $c->stash->{title};
+    if (! exists $c->stash->{title}) {
+	    $c->stash(title => 'Captive Portal');
+	}
+
+    if ($c->session->{target} !~ /^https?:\/\//) {
+        $c->session(target => $c->uri_for('/login/form'));
+    }
+
+    return 1;
 }
 
 sub end : ActionClass('RenderView') {}

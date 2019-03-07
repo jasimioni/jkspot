@@ -1,4 +1,4 @@
-# mar/02/2019 00:43:17 by RouterOS 6.43.12
+# mar/06/2019 09:48:02 by RouterOS 6.43.12
 # software id = DJ6T-MIEZ
 #
 # model = RouterBOARD 941-2nD
@@ -132,7 +132,7 @@ set *FFFFFFFE local-address=192.168.89.1 remote-address=*2
 /ppp secret
 add name=vpn
 /radius
-add address=138.197.59.19 secret=simioniserver service=hotspot
+add address=138.197.59.19 secret=jkspotsecret service=hotspot
 /system clock
 set time-zone-name=America/Sao_Paulo
 /tool mac-server
