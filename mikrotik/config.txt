@@ -1,4 +1,4 @@
-# mar/06/2019 09:48:02 by RouterOS 6.43.12
+# mar/07/2019 23:42:26 by RouterOS 6.43.12
 # software id = DJ6T-MIEZ
 #
 # model = RouterBOARD 941-2nD
@@ -47,7 +47,8 @@ add disabled=no mac-address=66:D1:54:60:99:A7 master-interface=wlan1 name=\
 /ip hotspot profile
 set [ find default=yes ] use-radius=yes
 add dns-name=hotspot.zabster.com.br hotspot-address=192.168.60.1 login-by=\
-    http-pap,mac-cookie name=hsprof1 radius-interim-update=5m use-radius=yes
+    https,http-pap,mac-cookie name=hsprof1 radius-interim-update=5m \
+    ssl-certificate=hotspot.zabster.com.br.pem_0 use-radius=yes
 /ip pool
 add name=dhcp_pool4 ranges=192.168.88.100-192.168.88.200
 add name=dhcp_pool5 ranges=192.168.50.100-192.168.50.200

@@ -1,4 +1,4 @@
-package Captive::Controller::Mikrotik;
+package Captive::Controller::ut;
 use Moose;
 use namespace::autoclean;
 
@@ -16,7 +16,7 @@ sub index :Path :Args(0) {
     $c->session('dst'    => $dst);
     $c->session('mac'    => $mac);
     $c->session('ip'     => $ip);
-    $c->session('device' => 'mikrotik');
+    $c->session('device' => 'ut');
 
     my $error = $c->req->params->{'error'};
     push @{$c->stash->{errors}}, $error if $error;
