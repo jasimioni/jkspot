@@ -20,13 +20,13 @@ __PACKAGE__->config(
 __PACKAGE__->config( 
 	customer_id  => 'cincoincubadora',
 	radius_attrs => {
-		'Mikrotik-Rate-Limit' => '2000k/2000k 4000k/4000k 2000k/2000k 60/60',
-		'Port-Limit'          => 1,
-		'Session-Timeout'     => 3600,
-		'Idle-Timeout'        => 1800,
+		speed   => 2,
+		ports   => 1,
+		session => 3600,
+		idle    => 1800,
 	},
 	authentication => {
-		default => 'name_email', # username_password, name_email, click_only
+		default => 'username_password', # username_password, name_email, click_only
 		username_password => {
 			allow_guest_creation => 0,
 		},

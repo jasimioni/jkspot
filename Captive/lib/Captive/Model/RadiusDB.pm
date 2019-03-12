@@ -6,6 +6,7 @@ use Try::Tiny;
 use JSON::MaybeXS;
 use Digest::MD5 qw/md5_hex/;
 use parent 'Catalyst::Model::DBI';
+use Log::Any qw/$log/;
 
 __PACKAGE__->config(
   dsn           => 'dbi:Pg:dbname=radius;host=127.0.0.1',
