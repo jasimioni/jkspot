@@ -38,8 +38,6 @@ while (my $row = $sth->fetchrow_hashref) {
 	my $keys = join(', ', keys %$row);
 	my $qmarks = join(', ', map { '?' } keys %$row);
 
-	$qmarks = join(', ', map { "'$_' "} values %$row);
-
 	my $sql = <<SQL
 INSERT INTO radacct ($keys) VALUES ($qmarks)
 	     ON CONFLICT (radacctid)
@@ -51,13 +49,10 @@ DO UPDATE SET
 	acctoutputoctets   = ?,
 	acctstoptime       = ?,
 	acctterminatecause = ?
-WHERE
-	radacctid = ?
 SQL
 ;
 	
 	print $sql;
-	exit;
 
 	try {
 		$cDbh{$row->{customer_id}}->do($sql, undef, values %$row, 
