@@ -21,12 +21,12 @@ __PACKAGE__->config(
 	customer_id  => 'cincoincubadora',
 	radius_attrs => {
 		speed   => 2,
-		ports   => 1,
+		ports   => 3,
 		session => 3600,
 		idle    => 1800,
 	},
 	authentication => {
-		default => 'username_password', # username_password, name_email, click_only
+		default => 'name_email', # username_password, name_email, click_only
 		username_password => {
 			allow_guest_creation => 0,
 		},
