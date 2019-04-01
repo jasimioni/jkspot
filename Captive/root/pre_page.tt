@@ -1,0 +1,18 @@
+<head>
+	<meta http-equiv="refresh" content="[% c.session.pre_page_timeout %]; url=[% c.uri_for('/login/form') %]" />
+</head>
+<body class="text-center">
+	[% IF errors %]
+	    [% FOR error IN errors %]
+		<div class="alert alert-danger" role="alert">
+		  [% error %]
+		</div>
+	    [% END %]
+	[% END %]
+		<img class="mb-4" src="[% c.uri_for('/static/images/customer_logo.png') %]" alt="">
+		<h4>Internet fornecida pela cincoincubadora</h4>
+		<h5>Aproveite nossos descontos especiais</h5>
+		<p>
+			<a href='[% c.uri_for('/login/form') %]'>Click aqui para fazer o login</a>
+		</p>
+</body>

@@ -35,8 +35,30 @@ __PACKAGE__->config(
 			appid   	  => '',
 			guest_allowed => 1,
 		}
+	},
+	pages => {
+		pre_page => { 
+			activate => 1,
+			url 	 => undef,
+			timeout  => 5,
+		},
+		pos_page => {
+			activate => 0,
+			url 	 => undef,
+			timeout  => 5,
+		},
 	}
 );
+
+sub pos_page {
+	my $self = shift;
+	return $self->config->{pages}{pos_page};
+}
+
+sub pre_page {
+	my $self = shift;
+	return $self->config->{pages}{pre_page};
+}
 
 sub customer_id {
 	my $self = shift;

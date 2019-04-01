@@ -19,6 +19,14 @@ sub default :Path {
     $c->response->status(404);
 }
 
+sub pre_page :Local :Args(0) {
+    my ( $self, $c ) = @_;
+}
+
+sub pos_page :Local :Args(0) {
+    my ( $self, $c ) = @_;
+}
+
 sub auto :Private {
     my ($self, $c) = @_;
     if (! exists $c->stash->{title}) {

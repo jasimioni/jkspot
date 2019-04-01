@@ -14,7 +14,20 @@ sub index :Path :Args(0) {
 sub form :Local {
     my ( $self, $c ) = @_;
 
-    $c->stash(authentication => $c->model('Config')->authentication);
+    my $pre_page = $c->model('Config')->pre_page;
+
+    if ($pre_page->{activate} && ! $c->session->{pre_page_displayed}) {
+        $c->log->debug("Pre page activated - redirecting");
+        $c->session(pre_page_displayed => 1);
+        my $timeout = defined $pre_page->{timeout} ? int($pre_page->{timeout}) : 5;
+        $c->session(pre_page_timeout => $timeout);
+
+        my $redirect_url = $pre_page->{url} ? $pre_page->{url} : $c->uri_for('/pre_page');
+
+        $c->response->redirect($redirect_url);
+    } else {
+        $c->stash(authentication => $c->model('Config')->authentication);
+    }
 }
 
 sub name_email :Local {
