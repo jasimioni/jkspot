@@ -26,7 +26,7 @@ __PACKAGE__->config(
 		idle    => 1800,
 	},
 	authentication => {
-		default => 'username_password', # username_password, name_email, click_only
+		default => 'click_only', # username_password, name_email, click_only
 		username_password => {
 			allow_guest_creation => 0,
 		},
