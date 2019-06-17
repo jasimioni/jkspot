@@ -20,7 +20,7 @@ __PACKAGE__->config(
 __PACKAGE__->config( 
 	customer_id  => 'cincoincubadora',
 	radius_attrs => {
-		speed   => 2,
+        # speed   => 2,
 		ports   => 3,
 		session => 3600,
 		idle    => 1800,
