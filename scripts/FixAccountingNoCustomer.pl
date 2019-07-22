@@ -19,7 +19,7 @@ $sth->execute;
 while (my $row = $sth->fetchrow_hashref) {
 	print "Checking rowid: ", $row->{radacctid}, "\n";
 
-	my $customer_id;
+	my ( $customer_id, $profile );
 
 	if (defined $row->{class}) {
 		my $details = {};
@@ -29,11 +29,12 @@ while (my $row = $sth->fetchrow_hashref) {
 		print Dumper $details;
 		if (defined $details->{customer_id}) {
 			$customer_id = $details->{customer_id};
+            $profile     = $details->{profile};
 		}
 	}	
 
 	if ( ! defined $customer_id ) {
-		my $sth2 = $dbh->prepare("SELECT customer_id FROM temp_credentials 
+		my $sth2 = $dbh->prepare("SELECT customer_id, details->>'profile' profile FROM temp_credentials 
 							       WHERE userid = ? AND DATE_TRUNC('second', created) <= ?::timestamp
 							    ORDER BY created DESC LIMIT 1");
 
@@ -41,11 +42,12 @@ while (my $row = $sth->fetchrow_hashref) {
 
 		$sth2->execute($row->{username}, $row->{acctstarttime});
 
-		($customer_id) = $sth2->fetchrow_array;
+		($customer_id, $profile) = $sth2->fetchrow_array;
 	}
 
 	$customer_id = 'unknown' if ! defined $customer_id;
+    $profile     = 'unknown' if ! defined $profile;
 
-	$dbh->do('UPDATE radacct SET customer_id = ? WHERE radacctid = ?', undef, $customer_id, $row->{radacctid});
+	$dbh->do('UPDATE radacct SET customer_id = ?, profile = ? WHERE radacctid = ?', undef, $customer_id, $profile, $row->{radacctid});
 }
 

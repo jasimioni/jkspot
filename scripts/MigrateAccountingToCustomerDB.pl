@@ -56,10 +56,12 @@ SQL
 
 	try {
 		$cDbh{$row->{customer_id}}->do($sql, undef, values %$row, 
-			  @{$row}{qw/acctsessiontime acctinterval acctupdatetime acctinputoctets acctoutputoctets acctstoptime acctterminatecause radacctid/});
+			  @{$row}{qw/acctsessiontime acctinterval acctupdatetime acctinputoctets acctoutputoctets acctstoptime acctterminatecause/});
 	} catch {
 		print "Failed: $_\n";
 		exit;
 	};
 
 }
+
+$dbh->do('UPDATE task_control SET value = ? WHERE var = ?', undef, $nowstr, 'last_radacct_migration');
